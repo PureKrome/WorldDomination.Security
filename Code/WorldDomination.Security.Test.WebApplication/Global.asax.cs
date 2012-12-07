@@ -15,5 +15,11 @@ namespace WorldDomination.Security.Test.WebApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        protected void Application_AuthenticateRequest()
+        {
+            // Handle custom cookies. Nom-nom-noms.
+            CustomFormsAuthentication.AuthenticateRequestDecryptCustomFormsAuthenticationTicket<UserData>(Context);
+        }
     }
 }

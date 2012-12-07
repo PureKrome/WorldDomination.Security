@@ -1,0 +1,20 @@
+﻿@model WorldDomination.Security.Test.WebApplication.Areas.Authentication.Models.AuthenticationViewModel
+
+<div>
+    @if (Model == null || Model.IsAuthenticated == false)
+    {
+        @Html.ActionLink("Sign in", "SignIn", "Authentication", new {Area = "Authentication"}, null)
+    }
+    else
+    {
+        <p>
+            @if (!string.IsNullOrEmpty(Model.PictureUri))
+            {
+                <img src="@Model.PictureUri" alt="@Model.Name" />
+            }
+            @Model.Name [@Model.Id] | 
+            @Html.ActionLink("Sign Out", "SignOut", "Authentication", new {Area = "Authentication"}, null)
+        </p>
+    }
+
+</div>

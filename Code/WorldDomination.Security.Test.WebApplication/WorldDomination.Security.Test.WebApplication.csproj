@@ -118,6 +118,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Authentication\Models\IndexViewModel.cs" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -139,6 +140,10 @@
     <Content Include="Areas\Authentication\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WorldDomination.Security.Mvc\WorldDomination.Security.Mvc.csproj">
+      <Project>{6493D0C4-05C6-4742-9137-7FD402817532}</Project>
+      <Name>WorldDomination.Security.Mvc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WorldDomination.Security.\WorldDomination.Security.csproj">
       <Project>{3a284283-be8a-49c2-ba60-ec09f77d848c}</Project>
       <Name>WorldDomination.Security</Name>
@@ -146,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Authentication\Views\Authentication\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Authentication\Views\Authentication\DisplayTemplates\AuthenticationViewModel.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

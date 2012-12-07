@@ -32,15 +32,26 @@ namespace WorldDomination.Security
             where T : IUserData
         {
             string formsCookieName = FormsAuthentication.FormsCookieName;
+            FormsAuthenticationTicket authenticationTicket = null;
+
+            // Try and retrieve the cookie.
             var httpCookie = httpContext.Request.Cookies[string.IsNullOrWhiteSpace(formsCookieName)
                                                              ? Guid.NewGuid().ToString()
                                                              : formsCookieName];
+            
+            if (httpCookie != null)
+            {
+                // We have a cookie so try and decrypt it and retrieve the authenticationTicket.
+                authenticationTicket = FormsAuthentication.Decrypt(httpCookie.Value);
+            }
 
-            var authenticationTicket = FormsAuthentication.Decrypt(httpCookie.Value);
+            // Create some empty UserData or use the decrypted data.
+            var userData = authenticationTicket == null ? new UserData() : new UserData(authenticationTicket.UserData);
 
-            var userData = new UserData(authenticationTicket.UserData);
-
+            // Finally, set up the Principal and Identity.
             var principal = new CustomPrincipal(new CustomIdentity(userData), null);
+            
+            // Remember this Principal.
             httpContext.User = principal;
             Thread.CurrentPrincipal = principal;
         }
