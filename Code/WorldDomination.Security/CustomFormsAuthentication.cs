@@ -9,13 +9,13 @@ namespace WorldDomination.Security
     {
         #region ICustomFormsAuthentication Members
 
-        public void SignIn(IUserData userData, HttpResponseBase httpResponseBase)
+        public void SignIn(IUserData userData, bool isPersistent, HttpResponseBase httpResponseBase)
         {
             string encodedTicket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(1,
                                                                                              userData.DisplayName,
                                                                                              DateTime.UtcNow,
                                                                                              DateTime.UtcNow.Add(FormsAuthentication.Timeout),
-                                                                                             true,
+                                                                                             isPersistent,
                                                                                              userData.ToString()));
             var httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket);
             httpResponseBase.Cookies.Add(httpCookie);
