@@ -7,5 +7,6 @@
         string PictureUri { get; set; }
 
         string Serialize();
+        void DeSerialize(string data);
     }
 }

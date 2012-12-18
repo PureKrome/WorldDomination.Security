@@ -29,15 +29,12 @@ namespace WorldDomination.Security
         #endregion
 
         public static void AuthenticateRequestDecryptCustomFormsAuthenticationTicket<T>(HttpContext httpContext)
-            where T : IUserData
+            where T : class, IUserData, new()
         {
-            string formsCookieName = FormsAuthentication.FormsCookieName;
             FormsAuthenticationTicket authenticationTicket = null;
 
             // Try and retrieve the cookie.
-            var httpCookie = httpContext.Request.Cookies[string.IsNullOrWhiteSpace(formsCookieName)
-                                                             ? Guid.NewGuid().ToString()
-                                                             : formsCookieName];
+            var httpCookie = httpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
             
             if (httpCookie != null)
             {
@@ -46,7 +43,12 @@ namespace WorldDomination.Security
             }
 
             // Create some empty UserData or use the decrypted data.
-            var userData = authenticationTicket == null ? new UserData() : new UserData(authenticationTicket.UserData);
+            var userData = new T();
+
+            if (authenticationTicket != null)
+            {
+                userData.DeSerialize(authenticationTicket.UserData);
+            }
 
             // Finally, set up the Principal and Identity.
             var principal = new CustomPrincipal(new CustomIdentity(userData), null);

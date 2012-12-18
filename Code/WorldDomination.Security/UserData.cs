@@ -16,12 +16,7 @@ namespace WorldDomination.Security
                 string.IsNullOrEmpty(PictureUri) ? "-" : PictureUri);
         }
 
-        public UserData()
-        {
-        }
-
-        // This should deserialize some serialized user-data which would have been in a Cookie.
-        public UserData(string data)
+        public void DeSerialize(string data)
         {
             if (string.IsNullOrWhiteSpace("data"))
             {
