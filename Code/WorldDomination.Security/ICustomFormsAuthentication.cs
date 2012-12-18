@@ -1,10 +1,8 @@
-﻿using System.Web;
-
-namespace WorldDomination.Security
+﻿namespace WorldDomination.Security
 {
     public interface ICustomFormsAuthentication
     {
-        void SignIn(IUserData userData, bool isPersistent, HttpResponseBase httpResponseBase);
+        void SignIn(IUserData userData);
         void SignOut();
     }
 }

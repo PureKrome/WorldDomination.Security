@@ -38,7 +38,7 @@ namespace WorldDomination.Security.Test.WebApplication.Areas.Authentication.Cont
                                PictureUri = "http://i.imgur.com/hVuuJ.png",
                                UserId = "users/69"
                            };
-            _customFormsAuthentication.SignIn(userData, false, Response);
+            _customFormsAuthentication.SignIn(userData);
 
             return RedirectToAction("Index");
         }

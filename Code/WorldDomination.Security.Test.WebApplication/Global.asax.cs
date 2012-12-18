@@ -4,8 +4,6 @@ using System.Web.Routing;
 
 namespace WorldDomination.Security.Test.WebApplication
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
@@ -16,10 +14,10 @@ namespace WorldDomination.Security.Test.WebApplication
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 
-        protected void Application_AuthenticateRequest()
-        {
-            // Handle custom cookies. Nom-nom-noms.
-            CustomFormsAuthentication.AuthenticateRequestDecryptCustomFormsAuthenticationTicket<UserData>(Context);
-        }
+        //protected void Application_AuthenticateRequest()
+        //{
+        //    // Handle custom cookies. Nom-nom-noms.
+        //    CustomFormsAuthentication.AuthenticateRequestDecryptCustomFormsAuthenticationTicket<UserData>(Context);
+        //}
     }
 }

@@ -8,7 +8,8 @@ namespace WorldDomination.Security.Test.WebApplication.Areas.Authentication.Mode
         {
             if (customPrincipal == null)
             {
-                throw new ArgumentNullException("customPrincipal");
+                return;
+                //throw new ArgumentNullException("customPrincipal");
             }
 
             IsAuthenticated = customPrincipal.Identity.IsAuthenticated;

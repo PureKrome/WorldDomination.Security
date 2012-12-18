@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IdentityModel.Services;
+using System.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
@@ -7,59 +10,72 @@ namespace WorldDomination.Security
 {
     public class CustomFormsAuthentication : ICustomFormsAuthentication
     {
+        const int DefaultTokenLifetimeInHours = 24;
+
         #region ICustomFormsAuthentication Members
 
-        public void SignIn(IUserData userData, bool isPersistent, HttpResponseBase httpResponseBase)
+        public void SignIn(IUserData userData)
         {
-            string encodedTicket =
-                FormsAuthentication.Encrypt(new FormsAuthenticationTicket(1,
-                                                                          userData.DisplayName,
-                                                                          DateTime.UtcNow,
-                                                                          DateTime.UtcNow.Add(FormsAuthentication.Timeout),
-                                                                          isPersistent,
-                                                                          userData.ToString()));
-            var httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket)
-                             {
-                                 Secure = HttpContext.Current.Request.IsSecureConnection
-                             };
-            httpResponseBase.Cookies.Add(httpCookie);
+            // Create the identity & then principal.
+            var identity = new ClaimsIdentity(userData.ToClaims(), "Forms");
+            var principal = new ClaimsPrincipal(identity);
+
+            // Claims transform.
+            principal = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(String.Empty, principal);
+
+            // Issue the cookie.
+            var sam = FederatedAuthentication.SessionAuthenticationModule;
+            if (sam == null)
+            {
+                throw new Exception("SessionAuthenticationModule is not configured and it needs to be.");
+            }
+
+            var token = new SessionSecurityToken(principal, TimeSpan.FromHours(DefaultTokenLifetimeInHours));
+            sam.WriteSessionTokenToCookie(token);
         }
 
         public void SignOut()
         {
-            FormsAuthentication.SignOut();
+            // Clear the cookie.
+            var sam = FederatedAuthentication.SessionAuthenticationModule;
+            if (sam == null)
+            {
+                throw new Exception("SessionAuthenticationModule is not configured and it needs to be.");
+            }
+
+            sam.SignOut();
         }
 
         #endregion
 
-        public static void AuthenticateRequestDecryptCustomFormsAuthenticationTicket<T>(HttpContext httpContext)
-            where T : class, IUserData, new()
-        {
-            FormsAuthenticationTicket authenticationTicket = null;
+        //public static void AuthenticateRequestDecryptCustomFormsAuthenticationTicket<T>(HttpContext httpContext)
+        //    where T : class, IUserData, new()
+        //{
+        //    FormsAuthenticationTicket authenticationTicket = null;
 
-            // Try and retrieve the cookie.
-            var httpCookie = httpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
+        //    // Try and retrieve the cookie.
+        //    var httpCookie = httpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
 
-            if (httpCookie != null)
-            {
-                // We have a cookie so try and decrypt it and retrieve the authenticationTicket.
-                authenticationTicket = FormsAuthentication.Decrypt(httpCookie.Value);
-            }
+        //    if (httpCookie != null)
+        //    {
+        //        // We have a cookie so try and decrypt it and retrieve the authenticationTicket.
+        //        authenticationTicket = FormsAuthentication.Decrypt(httpCookie.Value);
+        //    }
 
-            // Create some empty UserData or use the decrypted data.
-            var userData = new T();
+        //    // Create some empty UserData or use the decrypted data.
+        //    var userData = new T();
 
-            if (authenticationTicket != null)
-            {
-                userData.DeSerialize(authenticationTicket.UserData);
-            }
+        //    if (authenticationTicket != null)
+        //    {
+        //        userData.DeSerialize(authenticationTicket.UserData);
+        //    }
 
-            // Finally, set up the Principal and Identity.
-            var principal = new CustomPrincipal(new CustomIdentity(userData), null);
+        //    // Finally, set up the Principal and Identity.
+        //    var principal = new CustomPrincipal(new CustomIdentity(userData), null);
 
-            // Remember this Principal.
-            httpContext.User = principal;
-            Thread.CurrentPrincipal = principal;
-        }
+        //    // Remember this Principal.
+        //    httpContext.User = principal;
+        //    Thread.CurrentPrincipal = principal;
+        //}
     }
 }
