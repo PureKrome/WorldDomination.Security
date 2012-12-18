@@ -11,13 +11,17 @@ namespace WorldDomination.Security
 
         public void SignIn(IUserData userData, bool isPersistent, HttpResponseBase httpResponseBase)
         {
-            string encodedTicket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(1,
-                                                                                             userData.DisplayName,
-                                                                                             DateTime.UtcNow,
-                                                                                             DateTime.UtcNow.Add(FormsAuthentication.Timeout),
-                                                                                             isPersistent,
-                                                                                             userData.ToString()));
-            var httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket);
+            string encodedTicket =
+                FormsAuthentication.Encrypt(new FormsAuthenticationTicket(1,
+                                                                          userData.DisplayName,
+                                                                          DateTime.UtcNow,
+                                                                          DateTime.UtcNow.Add(FormsAuthentication.Timeout),
+                                                                          isPersistent,
+                                                                          userData.ToString()));
+            var httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket)
+                             {
+                                 Secure = HttpContext.Current.Request.IsSecureConnection
+                             };
             httpResponseBase.Cookies.Add(httpCookie);
         }
 
@@ -35,7 +39,7 @@ namespace WorldDomination.Security
 
             // Try and retrieve the cookie.
             var httpCookie = httpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
-            
+
             if (httpCookie != null)
             {
                 // We have a cookie so try and decrypt it and retrieve the authenticationTicket.
@@ -52,7 +56,7 @@ namespace WorldDomination.Security
 
             // Finally, set up the Principal and Identity.
             var principal = new CustomPrincipal(new CustomIdentity(userData), null);
-            
+
             // Remember this Principal.
             httpContext.User = principal;
             Thread.CurrentPrincipal = principal;
