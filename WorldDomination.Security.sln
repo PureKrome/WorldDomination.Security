@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{97BD49
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldDomination.Security.Mvc", "Code\WorldDomination.Security.Mvc\WorldDomination.Security.Mvc.csproj", "{6493D0C4-05C6-4742-9137-7FD402817532}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +32,6 @@ Global
 		{4C4BD36E-F742-43F3-B88F-50A032603D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C4BD36E-F742-43F3-B88F-50A032603D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C4BD36E-F742-43F3-B88F-50A032603D6C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6493D0C4-05C6-4742-9137-7FD402817532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6493D0C4-05C6-4742-9137-7FD402817532}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6493D0C4-05C6-4742-9137-7FD402817532}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6493D0C4-05C6-4742-9137-7FD402817532}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

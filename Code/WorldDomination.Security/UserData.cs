@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace WorldDomination.Security
@@ -18,44 +17,21 @@ namespace WorldDomination.Security
         {
             return new List<Claim>
                    {
+                       new Claim(ClaimTypes.Uri, UserId),
                        new Claim(ClaimTypes.NameIdentifier, DisplayName),
                        new Claim(ClaimTypes.Name, DisplayName),
-                       new Claim(ClaimTypes.Uri, PictureUri)
+                       new Claim(CustomClaimsTypes.PictureUri, PictureUri)
                    };
         }
 
         #endregion
 
-        public string Serialize()
+        public override string ToString()
         {
             return string.Format("{1}{0}{2}{0}{3}", Delimeter,
                                  string.IsNullOrEmpty(UserId) ? "-" : UserId,
                                  string.IsNullOrEmpty(DisplayName) ? "-" : DisplayName,
                                  string.IsNullOrEmpty(PictureUri) ? "-" : PictureUri);
-        }
-
-        public void DeSerialize(string data)
-        {
-            if (string.IsNullOrWhiteSpace("data"))
-            {
-                throw new ArgumentNullException("data");
-            }
-
-            // Split the text into segments.
-            string[] segments = data.Split(new[] {Delimeter}, StringSplitOptions.RemoveEmptyEntries);
-            if (segments.Length != 3)
-            {
-                throw new InvalidOperationException("Incorrect number of serialized items in the provided data.");
-            }
-
-            UserId = segments[0];
-            DisplayName = segments[1];
-            PictureUri = segments[2];
-        }
-
-        public override string ToString()
-        {
-            return Serialize();
         }
     }
 }

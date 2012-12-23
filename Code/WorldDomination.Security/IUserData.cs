@@ -9,8 +9,6 @@ namespace WorldDomination.Security
         string DisplayName { get; set; }
         string PictureUri { get; set; }
 
-        //string Serialize();
-        //void DeSerialize(string data);
         IEnumerable<Claim> ToClaims();
     }
 }

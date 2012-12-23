@@ -38,11 +38,9 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomClaimsTypes.cs" />
     <Compile Include="CustomFormsAuthentication.cs" />
-    <Compile Include="CustomIdentity.cs" />
-    <Compile Include="CustomPrincipal.cs" />
     <Compile Include="ICustomFormsAuthentication.cs" />
-    <Compile Include="ICustomIdentity.cs" />
     <Compile Include="IUserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserData.cs" />

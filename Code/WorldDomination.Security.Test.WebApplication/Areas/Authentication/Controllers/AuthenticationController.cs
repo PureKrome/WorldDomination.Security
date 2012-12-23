@@ -1,13 +1,12 @@
 ﻿using System.Web.Mvc;
 using AttributeRouting;
 using AttributeRouting.Web.Mvc;
-using WorldDomination.Security.Mvc;
 using WorldDomination.Security.Test.WebApplication.Areas.Authentication.Models;
 
 namespace WorldDomination.Security.Test.WebApplication.Areas.Authentication.Controllers
 {
     [RouteArea("Authentication")]
-    public class AuthenticationController : CustomPrincipalBaseController
+    public class AuthenticationController : Controller
     {
         private readonly ICustomFormsAuthentication _customFormsAuthentication;
         public AuthenticationController()
