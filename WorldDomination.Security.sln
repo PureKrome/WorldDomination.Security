@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldDomination.Security", "Code\WorldDomination.Security\WorldDomination.Security.csproj", "{3A284283-BE8A-49C2-BA60-EC09F77D848C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldDomination.Security.Test.UnitTests", "Code\WorldDomination.Security.Test.UnitTests\WorldDomination.Security.Test.UnitTests.csproj", "{DE20F062-AA8D-4C66-A393-1075E156245E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldDomination.Security.Test.WebApplication", "code\WorldDomination.Security.Test.WebApplication\WorldDomination.Security.Test.WebApplication.csproj", "{4C4BD36E-F742-43F3-B88F-50A032603D6C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{97BD4990-EBCF-41A0-B0CB-A406174B6FC4}"
@@ -24,10 +22,6 @@ Global
 		{3A284283-BE8A-49C2-BA60-EC09F77D848C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A284283-BE8A-49C2-BA60-EC09F77D848C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A284283-BE8A-49C2-BA60-EC09F77D848C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE20F062-AA8D-4C66-A393-1075E156245E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE20F062-AA8D-4C66-A393-1075E156245E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE20F062-AA8D-4C66-A393-1075E156245E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE20F062-AA8D-4C66-A393-1075E156245E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4C4BD36E-F742-43F3-B88F-50A032603D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C4BD36E-F742-43F3-B88F-50A032603D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C4BD36E-F742-43F3-B88F-50A032603D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
