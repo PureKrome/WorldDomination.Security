@@ -38,6 +38,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClaimsPrincipalExtensions.cs" />
     <Compile Include="CustomClaimsTypes.cs" />
     <Compile Include="CustomFormsAuthentication.cs" />
     <Compile Include="ICustomFormsAuthentication.cs" />
