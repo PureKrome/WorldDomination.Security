@@ -130,18 +130,17 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WorldDomination.Security\WorldDomination.Security.csproj">
+      <Project>{3a284283-be8a-49c2-ba60-ec09f77d848c}</Project>
+      <Name>WorldDomination.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Authentication\Views\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WorldDomination.Security.\WorldDomination.Security.csproj">
-      <Project>{3a284283-be8a-49c2-ba60-ec09f77d848c}</Project>
-      <Name>WorldDomination.Security</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Authentication\Views\Authentication\Index.cshtml" />
