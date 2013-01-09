@@ -30,13 +30,29 @@ namespace WorldDomination.Security
         /// <returns>List of claims.</returns>
         public IEnumerable<Claim> ToClaims()
         {
-            return new List<Claim>
-                   {
-                       new Claim(ClaimTypes.Uri, UserId),
-                       new Claim(ClaimTypes.NameIdentifier, DisplayName),
-                       new Claim(ClaimTypes.Name, DisplayName),
-                       new Claim(CustomClaimsTypes.PictureUri, PictureUri)
-                   };
+            var claims = new List<Claim>();
+            
+            if (!string.IsNullOrEmpty(UserId))
+            {
+                claims.Add(new Claim(ClaimTypes.Uri, UserId));
+            }
+
+            if (!string.IsNullOrEmpty(DisplayName))
+            {
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, DisplayName));
+            }
+            
+            if (!string.IsNullOrEmpty(DisplayName))
+            {
+                claims.Add(new Claim(ClaimTypes.Name, DisplayName));
+            }
+
+            if (!string.IsNullOrEmpty(PictureUri))
+            {
+                claims.Add(new Claim(CustomClaimsTypes.PictureUri, PictureUri));
+            }
+
+            return claims;
         }
 
         #endregion
