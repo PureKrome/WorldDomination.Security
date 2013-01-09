@@ -9,10 +9,25 @@ namespace WorldDomination.Security
 
         #region IUserData Members
 
+        /// <summary>
+        /// Unique User Id.
+        /// </summary>
         public string UserId { get; set; }
+
+        /// <summary>
+        /// User's public Display Name.
+        /// </summary>
         public string DisplayName { get; set; }
+
+        /// <summary>
+        /// A uri to a user's avatar/profile pic.
+        /// </summary>
         public string PictureUri { get; set; }
 
+        /// <summary>
+        /// Convert to the UserData into a list of Claims.
+        /// </summary>
+        /// <returns>List of claims.</returns>
         public IEnumerable<Claim> ToClaims()
         {
             return new List<Claim>

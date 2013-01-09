@@ -9,6 +9,11 @@ namespace WorldDomination.Security
     {
         #region ICustomFormsAuthentication Members
 
+        /// <summary>
+        /// Sign the user in with Claims.
+        /// </summary>
+        /// <param name="userData">UserData: the user data.</param>
+        /// <param name="tokenLifetimeInMinutes">int: cookie token lifetime.</param>
         public void SignIn(IUserData userData, int tokenLifetimeInMinutes = 60*24)
         {
             // Create the identity & then principal.
@@ -31,6 +36,9 @@ namespace WorldDomination.Security
             sam.WriteSessionTokenToCookie(token);
         }
 
+        /// <summary>
+        /// Sign out and remove all claims.
+        /// </summary>
         public void SignOut()
         {
             // Clear the cookie.
