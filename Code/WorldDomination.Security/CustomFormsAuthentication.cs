@@ -32,7 +32,7 @@ namespace WorldDomination.Security
                 throw new Exception("SessionAuthenticationModule is not configured and it needs to be.");
             }
 
-            var token = new SessionSecurityToken(principal, TimeSpan.FromHours(tokenLifetimeInMinutes));
+            var token = new SessionSecurityToken(principal, TimeSpan.FromMinutes(tokenLifetimeInMinutes));
             sam.WriteSessionTokenToCookie(token);
         }
 
