@@ -1,3 +1,7 @@
+# Archived - 10/04/2021
+
+---
+
 
 # A simple way to do Claims (Authentication) with ASP.NET.
 
